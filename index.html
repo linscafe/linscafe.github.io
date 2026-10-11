@@ -12,9 +12,15 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* Type scale: four sizes only */
+    --fs-sm: .875rem;
+    --fs-base: 1rem;
+    --fs-md: 1.125rem;
+    --fs-xl: 2.5rem;
+
     --bg: #faf7f2;
     --glow-1: rgba(255, 190, 130, .35);
     --glow-2: rgba(150, 190, 255, .30);
@@ -49,7 +55,7 @@
     margin: 0;
     min-height: 100vh;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: 16px;
+    font-size: var(--fs-base);
     line-height: 1.6;
     color: var(--text);
     background:
@@ -60,6 +66,7 @@
     transition: background-color .3s, color .3s;
   }
   a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { margin: 0; }
 
   .wrap {
     max-width: 64rem;
@@ -84,8 +91,6 @@
     color: #fff;
     font-family: Fraunces, Georgia, serif;
     font-weight: 600;
-    font-size: 1rem;
-    letter-spacing: .02em;
     box-shadow: 0 6px 16px -6px rgba(194, 65, 12, .6);
   }
   .theme-toggle {
@@ -108,27 +113,17 @@
   :root[data-theme="dark"] .theme-toggle .moon { display: none; }
 
   /* Hero */
-  .hero { padding: clamp(2.5rem, 8vw, 5rem) 0 clamp(2rem, 6vw, 3.5rem); }
-  .eyebrow {
-    margin: 0 0 .5rem;
-    font-size: .8rem;
-    font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
+  .hero { padding: 3rem 0 2.5rem; }
   h1 {
-    margin: 0;
     font-family: Fraunces, Georgia, serif;
     font-weight: 600;
-    font-size: clamp(2.75rem, 9vw, 4.5rem);
-    line-height: 1.05;
-    letter-spacing: -.02em;
+    font-size: var(--fs-xl);
+    line-height: 1.1;
+    letter-spacing: -.01em;
   }
   .lede {
-    max-width: 32rem;
-    margin: 1rem 0 0;
-    font-size: 1.125rem;
+    margin: .5rem 0 0;
+    font-size: var(--fs-md);
     color: var(--muted);
   }
 
@@ -136,16 +131,11 @@
   .section-head {
     display: flex;
     align-items: baseline;
-    gap: .75rem;
-    margin-bottom: 1.25rem;
+    gap: .5rem;
+    margin-bottom: 1rem;
   }
-  h2 {
-    margin: 0;
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 500;
-    font-size: 1.5rem;
-  }
-  .count { font-size: .875rem; color: var(--muted); }
+  h2, h3 { font-size: var(--fs-md); font-weight: 600; }
+  .count { font-size: var(--fs-sm); color: var(--muted); }
 
   .grid {
     display: grid;
@@ -169,66 +159,28 @@
   .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
   .card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-  .card-art {
-    position: relative;
-    display: grid;
-    place-items: center;
-    height: 9rem;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--c1), var(--c2));
+  .card-art { height: 10rem; overflow: hidden; }
+  .card-art svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: transform .4s ease;
   }
-  .card-art::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, .28) 1px, transparent 1.5px);
-    background-size: 14px 14px;
-    mask-image: linear-gradient(120deg, transparent 20%, #000 90%);
-    -webkit-mask-image: linear-gradient(120deg, transparent 20%, #000 90%);
-  }
-  .card-art::after {
-    content: "";
-    position: absolute;
-    width: 11rem;
-    height: 11rem;
-    right: -3.5rem;
-    bottom: -5rem;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .14);
-  }
-  .card-icon {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    width: 4.25rem;
-    height: 4.25rem;
-    border-radius: 1.25rem;
-    color: #fff;
-    background: rgba(255, 255, 255, .2);
-    border: 1px solid rgba(255, 255, 255, .45);
-    box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .35);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    transition: transform .3s ease;
-  }
-  .card:hover .card-icon { transform: scale(1.08) rotate(-4deg); }
-  .card-icon svg { width: 2.1rem; height: 2.1rem; }
+  .card:hover .card-art svg { transform: scale(1.04); }
+  :root[data-theme="dark"] .card-art svg { filter: brightness(.88); }
 
   .card-body {
     display: flex;
     flex: 1;
     flex-direction: column;
-    padding: 1.25rem 1.25rem 1.35rem;
+    padding: 1.25rem;
   }
   .card h3 {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: .5rem;
-    margin: 0 0 .4rem;
-    font-size: 1.125rem;
-    font-weight: 600;
+    margin-bottom: .35rem;
   }
   .arrow {
     flex: none;
@@ -241,7 +193,6 @@
   .card p {
     flex: 1;
     margin: 0 0 1rem;
-    font-size: .95rem;
     color: var(--muted);
   }
   .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -249,20 +200,19 @@
     display: inline-flex;
     align-items: center;
     gap: .3rem;
-    padding: .2rem .6rem;
+    padding: .1rem .6rem;
     border-radius: 999px;
     background: var(--tag-bg);
-    font-size: .75rem;
-    font-weight: 500;
+    font-size: var(--fs-sm);
     color: var(--muted);
   }
-  .tag svg { width: .75rem; height: .75rem; }
+  .tag svg { width: .8em; height: .8em; }
 
   footer {
-    margin-top: clamp(3rem, 10vw, 6rem);
+    margin-top: 4rem;
     padding: 2rem 0 2.5rem;
     border-top: 1px solid var(--border);
-    font-size: .875rem;
+    font-size: var(--fs-sm);
     color: var(--muted);
   }
 
@@ -289,7 +239,6 @@
 
   <main>
     <section class="hero">
-      <p class="eyebrow">Hello, I'm</p>
       <h1>Rick Lin</h1>
       <p class="lede">Projects and small tools for the life sciences.</p>
     </section>
@@ -302,11 +251,55 @@
 
       <ul class="grid">
         <li>
-          <a class="card" href="/molecule-calculator/" style="--c1:#2dd4bf;--c2:#0e7490">
+          <a class="card" href="/molecule-calculator/">
             <div class="card-art">
-              <span class="card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.8" r="2.3"/><circle cx="4.8" cy="17.5" r="2.3"/><circle cx="19.2" cy="17.5" r="2.3"/><circle cx="12" cy="12.6" r="1.7"/><path d="M12 7.1v3.8M10.5 13.5l-3.7 2.8M13.5 13.5l3.7 2.8"/></svg>
-              </span>
+              <!-- Flask with floating molecules -->
+              <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="mc-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6faf6"/><stop offset="1" stop-color="#b8ece2"/></linearGradient>
+                  <linearGradient id="mc-liquid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#0d9488"/></linearGradient>
+                </defs>
+                <rect width="320" height="160" fill="url(#mc-bg)"/>
+                <circle cx="160" cy="78" r="60" fill="#fff" opacity=".55"/>
+                <rect y="128" width="320" height="32" fill="#9fe3d6"/>
+                <path d="M0 128h320" stroke="#6fcfbf" stroke-width="2"/>
+                <g fill="#2dd4bf" opacity=".7">
+                  <path transform="translate(118 30)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                  <path transform="translate(212 22) scale(.8)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                  <path transform="translate(298 112) scale(.7)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                </g>
+                <!-- left molecule -->
+                <path d="M62 52L86 68M62 52L54 82M86 68L104 56" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="62" cy="52" r="10" fill="#f97316"/>
+                <circle cx="59" cy="49" r="3" fill="#fff" opacity=".6"/>
+                <circle cx="86" cy="68" r="7.5" fill="#fcd34d"/>
+                <circle cx="54" cy="82" r="6" fill="#fff" stroke="#0f766e" stroke-width="2"/>
+                <circle cx="104" cy="56" r="5.5" fill="#fff" stroke="#0f766e" stroke-width="2"/>
+                <!-- right molecule (ring) -->
+                <path d="M252 40V26M267.6 67L284 80" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+                <polygon points="252,40 267.6,49 267.6,67 252,76 236.4,67 236.4,49" fill="#fff" fill-opacity=".7" stroke="#0f766e" stroke-width="3" stroke-linejoin="round"/>
+                <circle cx="252" cy="58" r="8" fill="none" stroke="#0f766e" stroke-width="2"/>
+                <circle cx="252" cy="22" r="5.5" fill="#fcd34d"/>
+                <circle cx="286" cy="82" r="7" fill="#ec4899"/>
+                <circle cx="284" cy="80" r="2.2" fill="#fff" opacity=".6"/>
+                <!-- flask -->
+                <ellipse cx="160" cy="129" rx="50" ry="4" fill="#0f766e" opacity=".18"/>
+                <path d="M151 38H169V70L203 118Q208 128 196 128H124Q112 128 117 118L151 70Z" fill="#fff" opacity=".75"/>
+                <path d="M135 96Q147.5 91 160 96T185 96L198 115Q202 124 193 124H127Q118 124 122 115Z" fill="url(#mc-liquid)"/>
+                <g fill="#fff" opacity=".75">
+                  <circle cx="146" cy="112" r="3.5"/><circle cx="160" cy="105" r="2.2"/><circle cx="175" cy="115" r="4"/><circle cx="186" cy="107" r="2"/>
+                </g>
+                <path d="M151 38H169V70L203 118Q208 128 196 128H124Q112 128 117 118L151 70Z" fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round"/>
+                <rect x="145" y="32" width="30" height="7" rx="3.5" fill="#fff" stroke="#0f766e" stroke-width="3"/>
+                <path d="M166 80h7M171 88h7" stroke="#0f766e" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+                <path d="M156 44v22M140 94l-10 15" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+                <g fill="#2dd4bf" opacity=".75">
+                  <circle cx="157" cy="24" r="3.5"/><circle cx="166" cy="14" r="2.5"/><circle cx="151" cy="10" r="2"/>
+                </g>
+                <!-- Avogadro label -->
+                <rect x="20" y="100" width="84" height="24" rx="12" fill="#fff" stroke="#0f766e" stroke-width="2"/>
+                <text x="62" y="116" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#0f766e">6.02×10²³</text>
+              </svg>
             </div>
             <div class="card-body">
               <h3>Molecule Calculator
@@ -318,11 +311,49 @@
           </a>
         </li>
         <li>
-          <a class="card" href="https://ricklin.se/biotech-search/" style="--c1:#818cf8;--c2:#6d28d9">
+          <a class="card" href="https://ricklin.se/biotech-search/">
             <div class="card-art">
-              <span class="card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.8"/><path d="m15.4 15.4 5.1 5.1"/><path d="M8 6.8c0 2.4 5 3 5 5.4s-5 0-5 2.4M13 6.8c0 2.4-5 3-5 5.4"/><path d="M8.7 8.6h3.6M8.7 12.4h3.6"/></svg>
-              </span>
+              <!-- Magnifying glass over a DNA helix and a skyline -->
+              <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="bs-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1edff"/><stop offset="1" stop-color="#d6ccfe"/></linearGradient>
+                  <clipPath id="bs-lens"><circle cx="178" cy="66" r="33"/></clipPath>
+                  <g id="bs-helix" fill="none" stroke-linecap="round">
+                    <path stroke="#fbbf24" stroke-width="3" d="M40 54.4V85.6M80 54.4V85.6M120 54.4V85.6M160 54.4V85.6M200 54.4V85.6M240 54.4V85.6M280 54.4V85.6"/>
+                    <path stroke="#34d399" stroke-width="3" d="M50 48V92M90 48V92M130 48V92M170 48V92M210 48V92M250 48V92M290 48V92"/>
+                    <path stroke="#60a5fa" stroke-width="3" d="M60 54.4V85.6M100 54.4V85.6M140 54.4V85.6M180 54.4V85.6M220 54.4V85.6M260 54.4V85.6M300 54.4V85.6"/>
+                    <path stroke="#ec4899" stroke-width="5" d="M30 70C43 99 57 99 70 70S97 41 110 70S137 99 150 70S177 41 190 70S217 99 230 70S257 41 270 70S297 99 310 70"/>
+                    <path stroke="#7c3aed" stroke-width="5" d="M30 70C43 41 57 41 70 70S97 99 110 70S137 41 150 70S177 99 190 70S217 41 230 70S257 99 270 70S297 41 310 70"/>
+                  </g>
+                </defs>
+                <rect width="320" height="160" fill="url(#bs-bg)"/>
+                <g fill="#8b5cf6" opacity=".6">
+                  <path transform="translate(40 26)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                  <path transform="translate(290 26) scale(.8)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                  <path transform="translate(124 130) scale(.7)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                </g>
+                <!-- skyline -->
+                <rect y="140" width="320" height="20" fill="#c4b5fd"/>
+                <g fill="#a78bfa" opacity=".6">
+                  <rect x="16" y="110" width="22" height="32" rx="2"/><rect x="42" y="96" width="18" height="46" rx="2"/><rect x="64" y="118" width="30" height="24" rx="2"/>
+                  <rect x="250" y="108" width="20" height="34" rx="2"/><rect x="274" y="118" width="30" height="24" rx="2"/>
+                </g>
+                <g fill="#fff" opacity=".7">
+                  <rect x="46" y="102" width="4" height="4"/><rect x="52" y="102" width="4" height="4"/><rect x="46" y="111" width="4" height="4"/><rect x="52" y="111" width="4" height="4"/><rect x="46" y="120" width="4" height="4"/><rect x="52" y="120" width="4" height="4"/>
+                  <rect x="254" y="114" width="4" height="4"/><rect x="262" y="114" width="4" height="4"/><rect x="254" y="123" width="4" height="4"/><rect x="262" y="123" width="4" height="4"/>
+                </g>
+                <use href="#bs-helix"/>
+                <!-- magnified view -->
+                <g clip-path="url(#bs-lens)">
+                  <circle cx="178" cy="66" r="33" fill="#faf8ff"/>
+                  <use href="#bs-helix" transform="translate(178 66) scale(1.7) translate(-178 -66)"/>
+                  <circle cx="178" cy="66" r="33" fill="#fff" opacity=".12"/>
+                </g>
+                <path d="M203 91L236 124" stroke="#4c1d95" stroke-width="9" stroke-linecap="round"/>
+                <path d="M216 104L238 126" stroke="#f59e0b" stroke-width="13" stroke-linecap="round"/>
+                <circle cx="178" cy="66" r="34.5" fill="none" stroke="#4c1d95" stroke-width="7"/>
+                <path d="M158 50A25 25 0 0 1 176 40" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+              </svg>
             </div>
             <div class="card-body">
               <h3>Biotech Search
@@ -334,11 +365,49 @@
           </a>
         </li>
         <li>
-          <a class="card" href="https://omics-daily.yiilih.workers.dev/" style="--c1:#fbbf24;--c2:#db2777">
+          <a class="card" href="https://omics-daily.yiilih.workers.dev/">
             <div class="card-art">
-              <span class="card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="M6.5 13.2c1.4-1.6 3.3-1.6 4.7 0s3.3 1.6 4.7 0M6.5 17.2c1.4-1.6 3.3-1.6 4.7 0s3.3 1.6 4.7 0"/></svg>
-              </span>
+              <!-- Morning newspaper and coffee -->
+              <svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="od-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#fdd5e4"/></linearGradient>
+                </defs>
+                <rect width="320" height="160" fill="url(#od-bg)"/>
+                <circle cx="272" cy="44" r="34" fill="#fdba74" opacity=".3"/>
+                <circle cx="272" cy="44" r="22" fill="#fdba74"/>
+                <g fill="#f59e0b" opacity=".7">
+                  <path transform="translate(76 26)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                  <path transform="translate(212 20) scale(.8)" d="M0-7C1-1 1-1 7 0C1 1 1 1 0 7C-1 1-1 1-7 0C-1-1-1-1 0-7Z"/>
+                </g>
+                <!-- cells -->
+                <circle cx="42" cy="58" r="15" fill="#fda4af" opacity=".55"/>
+                <circle cx="44" cy="56" r="5.5" fill="#e11d48" opacity=".5"/>
+                <circle cx="62" cy="98" r="10" fill="#fcd34d" opacity=".65"/>
+                <circle cx="64" cy="97" r="3.5" fill="#d97706" opacity=".6"/>
+                <circle cx="30" cy="122" r="6" fill="#f9a8d4" opacity=".75"/>
+                <!-- table -->
+                <rect y="138" width="320" height="22" fill="#f9c0a6" opacity=".6"/>
+                <path d="M0 138h320" stroke="#f0a083" stroke-width="2"/>
+                <!-- newspaper -->
+                <rect x="88" y="34" width="112" height="98" rx="6" fill="#fdf2f8" stroke="#be185d" stroke-width="2.5" transform="rotate(4 144 83)"/>
+                <g transform="rotate(-5 144 83)">
+                  <rect x="88" y="32" width="112" height="100" rx="6" fill="#fff" stroke="#be185d" stroke-width="2.5"/>
+                  <text x="144" y="50" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="12" font-weight="600" fill="#831843">Omics Daily</text>
+                  <path d="M98 57h92" stroke="#be185d" stroke-width="1.5"/>
+                  <rect x="98" y="64" width="38" height="32" rx="3" fill="#fce7f3"/>
+                  <path d="M104 72c5 0 9 16 14 16s9-16 14-16" fill="none" stroke="#db2777" stroke-width="2"/>
+                  <path d="M104 88c5 0 9-16 14-16s9 16 14 16" fill="none" stroke="#f59e0b" stroke-width="2"/>
+                  <path d="M142 67h48M142 75h40M142 83h48M142 91h30M98 105h92M98 113h84M98 121h88" stroke="#f9a8d4" stroke-width="3.5" stroke-linecap="round"/>
+                </g>
+                <!-- coffee -->
+                <path d="M230 90c-5-5 5-9 0-14s5-9 0-14M244 92c-5-5 5-9 0-14s5-9 0-14" fill="none" stroke="#f3a5b9" stroke-width="3" stroke-linecap="round"/>
+                <ellipse cx="238" cy="139" rx="34" ry="5.5" fill="#fff" stroke="#9a3412" stroke-width="2.5"/>
+                <path d="M262 106Q276 106 276 116Q276 126 262 126" fill="none" stroke="#9a3412" stroke-width="2.5"/>
+                <path d="M214 100V118Q214 136 232 136H244Q262 136 262 118V100" fill="#fff" stroke="#9a3412" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M215.5 112H260.5" stroke="#f472b6" stroke-width="4"/>
+                <ellipse cx="238" cy="100" rx="24" ry="5" fill="#fff" stroke="#9a3412" stroke-width="2.5"/>
+                <ellipse cx="238" cy="100" rx="20" ry="3.2" fill="#7c2d12"/>
+              </svg>
             </div>
             <div class="card-body">
               <h3>Omics Daily

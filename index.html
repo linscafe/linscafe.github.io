@@ -1,18 +1,15 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rick Lin</title>
+<title>Rick Lin's projects and small tools for the life sciences</title>
 <meta name="description" content="Rick Lin — projects and small tools for the life sciences.">
 <meta name="theme-color" content="#faf7f2">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23c2410c'/><text x='16' y='21.5' font-family='Georgia,serif' font-size='14' font-weight='700' fill='white' text-anchor='middle'>RL</text></svg>">
-<script>
-  try { if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     /* Type scale: four sizes only */
@@ -34,20 +31,6 @@
     --shadow-hover: 0 2px 4px rgba(31, 29, 26, .05), 0 24px 44px -18px rgba(31, 29, 26, .30);
     color-scheme: light;
   }
-  :root[data-theme="dark"] {
-    --bg: #14130f;
-    --glow-1: rgba(194, 65, 12, .18);
-    --glow-2: rgba(80, 110, 200, .18);
-    --surface: #1d1b17;
-    --text: #f2eee7;
-    --muted: #a39d92;
-    --border: rgba(255, 255, 255, .08);
-    --tag-bg: #2a2722;
-    --accent: #fb923c;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 28px -14px rgba(0, 0, 0, .6);
-    --shadow-hover: 0 2px 4px rgba(0, 0, 0, .3), 0 24px 44px -18px rgba(0, 0, 0, .8);
-    color-scheme: dark;
-  }
 
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -63,7 +46,6 @@
       radial-gradient(48rem 32rem at 100% 0%, var(--glow-2), transparent 60%),
       var(--bg);
     background-attachment: fixed;
-    transition: background-color .3s, color .3s;
   }
   a { color: inherit; text-decoration: none; }
   h1, h2, h3 { margin: 0; }
@@ -74,57 +56,15 @@
     padding: 0 clamp(1rem, 4vw, 2rem);
   }
 
-  /* Top bar */
-  .top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 0;
-  }
-  .mono {
-    display: grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: .75rem;
-    background: linear-gradient(135deg, #f97316, #c2410c);
-    color: #fff;
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 600;
-    box-shadow: 0 6px 16px -6px rgba(194, 65, 12, .6);
-  }
-  .theme-toggle {
-    display: grid;
-    place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--text);
-    cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: transform .2s;
-  }
-  .theme-toggle:hover { transform: rotate(-15deg); }
-  .theme-toggle svg { width: 1.15rem; height: 1.15rem; }
-  .theme-toggle .sun { display: none; }
-  :root[data-theme="dark"] .theme-toggle .sun { display: block; }
-  :root[data-theme="dark"] .theme-toggle .moon { display: none; }
-
   /* Hero */
-  .hero { padding: 3rem 0 2.5rem; }
+  .hero { padding: 5rem 0 2.5rem; }
   h1 {
-    font-family: Fraunces, Georgia, serif;
     font-weight: 600;
     font-size: var(--fs-xl);
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -.01em;
-  }
-  .lede {
-    margin: .5rem 0 0;
-    font-size: var(--fs-md);
-    color: var(--muted);
+    max-width: 22ch;
+    text-wrap: balance;
   }
 
   /* Projects */
@@ -167,7 +107,6 @@
     transition: transform .4s ease;
   }
   .card:hover .card-art svg { transform: scale(1.04); }
-  :root[data-theme="dark"] .card-art svg { filter: brightness(.88); }
 
   .card-body {
     display: flex;
@@ -229,18 +168,9 @@
 </head>
 <body>
 <div class="wrap">
-  <header class="top">
-    <a href="/" aria-label="Home"><span class="mono">RL</span></a>
-    <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
-      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
-      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-    </button>
-  </header>
-
   <main>
     <section class="hero">
-      <h1>Rick Lin</h1>
-      <p class="lede">Projects and small tools for the life sciences.</p>
+      <h1>Rick Lin's projects and small tools for the life sciences.</h1>
     </section>
 
     <section aria-labelledby="projects">
@@ -392,7 +322,7 @@
                 <rect x="88" y="34" width="112" height="98" rx="6" fill="#fdf2f8" stroke="#be185d" stroke-width="2.5" transform="rotate(4 144 83)"/>
                 <g transform="rotate(-5 144 83)">
                   <rect x="88" y="32" width="112" height="100" rx="6" fill="#fff" stroke="#be185d" stroke-width="2.5"/>
-                  <text x="144" y="50" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="12" font-weight="600" fill="#831843">Omics Daily</text>
+                  <text x="144" y="50" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="600" fill="#831843">Omics Daily</text>
                   <path d="M98 57h92" stroke="#be185d" stroke-width="1.5"/>
                   <rect x="98" y="64" width="38" height="32" rx="3" fill="#fce7f3"/>
                   <path d="M104 72c5 0 9 16 14 16s9-16 14-16" fill="none" stroke="#db2777" stroke-width="2"/>
@@ -424,15 +354,5 @@
 
   <footer>© 2026 Rick Lin</footer>
 </div>
-
-<script>
-  document.querySelector('.theme-toggle').addEventListener('click', function () {
-    var root = document.documentElement;
-    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    document.querySelector('meta[name="theme-color"]').content = next === 'dark' ? '#14130f' : '#faf7f2';
-    try { localStorage.setItem('theme', next); } catch (e) {}
-  });
-</script>
 </body>
 </html>
